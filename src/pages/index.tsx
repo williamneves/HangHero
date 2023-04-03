@@ -143,7 +143,7 @@ const LetterBox: React.FC<LetterBoxProps> = ({ letter, guessed }) => {
   if (guessed) {
     return (
       <div
-        key={letter+'_guessedLetter'+randomIndex}
+        key={`${letter}_guessedLetter${randomIndex}`}
         className="flex h-10 w-8 justify-center rounded-md border border-base-300 p-2 text-center align-baseline text-base">
         {letter}
       </div>
@@ -152,7 +152,7 @@ const LetterBox: React.FC<LetterBoxProps> = ({ letter, guessed }) => {
 
   return (
     <div
-      key={letter + "_letter"+randomIndex}
+      key={`${letter}_guessedLetter${randomIndex}`}
       className="flex h-10 w-8 justify-center rounded-md border border-base-300 p-2 text-center align-baseline text-base"
     >
       {"_"}
@@ -313,9 +313,10 @@ const Home: NextPage = () => {
         <div className="my-5 flex flex-row items-center gap-3">
           {
             // Pick the wordLetters map and map over it to create a list of letters, and if the letter is guessed, show it, if not, show a dash
-            Array.from(word).map((letter) => {
+            Array.from(word).map((letter, i) => {
               return (
                 <LetterBox
+                  key={letter + String(i)}
                   letter={letter}
                   guessed={(guesses as string[]).includes(letter)}
                 />
